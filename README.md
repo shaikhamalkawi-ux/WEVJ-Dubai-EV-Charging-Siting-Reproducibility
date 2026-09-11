@@ -33,23 +33,34 @@ Any reproduced or verified output should preserve the published result state:
 
 These values are verification targets, not parameters to be re-estimated.
 
+## Release verification status
+
+The final publisher-facing supplementary ZIP supplied for this archive was checked before preparing the first GitHub/Zenodo release candidate.
+
+- Original supplementary ZIP integrity: **PASS**
+- Original static SHA-256 manifest: **89/89 PASS**
+- Published reported-output verifier: **54 PASS / 0 FAIL**
+- Public-safe release-candidate verifier: **54 PASS / 0 FAIL**
+- Public-safe CSV coordinate-column scan: **PASS**
+
+For the GitHub/Zenodo public companion, two publisher-facing files are not re-published: a candidate-level transit-context file containing latitude/longitude fields and an internal source-bound reconstruction script containing absolute local paths and dependencies on controlled/raw inputs. Aggregate transit summaries and the public reported-output verifier remain included. This is a packaging-only filter and does not alter any published result, score, rank, weight, model structure, or conclusion. Details and hashes are recorded in `release/`.
+
 ## Repository structure
 
 - `data/` — documentation for reuse-safe derived data and redistribution boundaries.
 - `results/` — published verification targets and reported-output checks.
 - `reproducibility/` — release instructions and the reproducibility boundary.
+- `release/` — release-candidate verification notes and package hashes.
 - `CITATION.cff` — citation metadata for GitHub.
 - `.zenodo.json` — metadata prepared for Zenodo archiving.
 
-The first archival release will include reuse-safe supplementary files and verifier material only after they are checked against the final published supplementary package.
-
 ## Data and redistribution boundary
 
-The article uses public-data-derived and author-generated outputs. The published Supplementary Materials provide coordinate-free candidate metrics, scenario/rank diagnostics, sensitivity summaries, source/date/unit documentation, verifier material, and bounded spatial-context summaries used for reported tables and figures.
+The article uses public-data-derived and author-generated outputs. The public GitHub/Zenodo companion is restricted to reuse-safe derived outputs, verification material, and bounded summaries.
 
 Raw third-party exports or coordinate archives whose licensing or platform terms may restrict redistribution should **not** be copied into this repository merely for convenience. Where redistribution is not appropriate, this repository documents the source, date, role, and retrieval route instead.
 
-The official article and its Supplementary Materials remain the authoritative scientific record.
+The official article and its publisher-hosted Supplementary Materials remain the authoritative scientific record.
 
 ## Citation
 
@@ -57,4 +68,4 @@ Please cite the published article when using the scientific method or results. O
 
 ## Versioning
 
-The first archival release should be tagged `v1.0.0` only after the repository payload has been checked against the final published Supplementary Materials and the reported-output verifier has passed. Later releases should document repository or packaging changes without altering the published scientific results unless a documented correction is issued by the authors or publisher.
+The first archival release is tagged `v1.0.0` only after the verified public-safe package is present in the repository. Later releases should document repository or packaging changes without altering the published scientific results unless a documented correction is issued by the authors or publisher.
