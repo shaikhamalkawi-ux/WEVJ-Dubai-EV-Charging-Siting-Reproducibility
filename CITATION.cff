@@ -1,0 +1,55 @@
+cff-version: 1.2.0
+message: "If you use the scientific method or results, please cite the published article. Cite the Zenodo archive additionally when referring specifically to this reproducibility package."
+title: "WEVJ Dubai EV Charging Siting Reproducibility Archive"
+authors:
+  - family-names: Malkawi
+    given-names: Ghassan
+  - family-names: Alazzam
+    given-names: Azmi
+  - family-names: Elsayed
+    given-names: Ahmed Abdelaziz
+  - family-names: Omari
+    given-names: Asem
+  - family-names: Badreddine
+    given-names: Said
+  - family-names: Hussein
+    given-names: Bakeel
+  - family-names: Alhagyan
+    given-names: Mohammed
+  - family-names: Altigani
+    given-names: Abdelrahman
+repository-code: "https://github.com/shaikhamalkawi-ux/WEVJ-Dubai-EV-Charging-Siting-Reproducibility"
+keywords:
+  - electric vehicle charging stations
+  - EV charging siting
+  - Dubai
+  - NI-EA
+  - GIS
+  - multi-criteria decision making
+  - robustness audit
+  - reproducibility
+preferred-citation:
+  type: article
+  title: "An Interaction-Aware NI-EA Framework for EV Charging-Station Siting: Source-Conditioned Robust Candidate Sets and Bounded Spatial Evidence in Dubai"
+  authors:
+    - family-names: Malkawi
+      given-names: Ghassan
+    - family-names: Alazzam
+      given-names: Azmi
+    - family-names: Elsayed
+      given-names: Ahmed Abdelaziz
+    - family-names: Omari
+      given-names: Asem
+    - family-names: Badreddine
+      given-names: Said
+    - family-names: Hussein
+      given-names: Bakeel
+    - family-names: Alhagyan
+      given-names: Mohammed
+    - family-names: Altigani
+      given-names: Abdelrahman
+  journal: "World Electric Vehicle Journal"
+  year: 2026
+  volume: 17
+  issue: 8
+  doi: "10.3390/wevj17080411"
