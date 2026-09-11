@@ -1,9 +1,10 @@
 cff-version: 1.2.0
-message: "If you use the scientific method or results, please cite the published article. Cite the Zenodo archive additionally when referring specifically to this reproducibility package."
+message: "If you use the scientific method or results, please cite the published article. Cite the Zenodo archive additionally when referring specifically to this reported-output reproducibility package."
 title: "WEVJ Dubai EV Charging Siting Reproducibility Archive"
 authors:
   - family-names: Malkawi
     given-names: Ghassan
+    orcid: "https://orcid.org/0000-0002-5320-7561"
   - family-names: Alazzam
     given-names: Azmi
   - family-names: Elsayed
@@ -27,6 +28,7 @@ keywords:
   - GIS
   - multi-criteria decision making
   - robustness audit
+  - reported-output verification
   - reproducibility
 preferred-citation:
   type: article
@@ -34,6 +36,7 @@ preferred-citation:
   authors:
     - family-names: Malkawi
       given-names: Ghassan
+      orcid: "https://orcid.org/0000-0002-5320-7561"
     - family-names: Alazzam
       given-names: Azmi
     - family-names: Elsayed
