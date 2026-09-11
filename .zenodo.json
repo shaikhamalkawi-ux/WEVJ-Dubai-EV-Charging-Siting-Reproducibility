@@ -1,0 +1,32 @@
+{
+  "title": "WEVJ Dubai EV Charging Siting Reproducibility Archive",
+  "upload_type": "software",
+  "description": "Reproducibility companion for the published World Electric Vehicle Journal article 'An Interaction-Aware NI-EA Framework for EV Charging-Station Siting: Source-Conditioned Robust Candidate Sets and Bounded Spatial Evidence in Dubai' (2026, 17(8), 411; DOI: 10.3390/wevj17080411). The archive supports verification of the published public-data screening and robustness-audit results. It does not constitute demand validation, feeder-capacity validation, power-flow analysis, financial feasibility assessment, construction approval, or a final deployment plan.",
+  "creators": [
+    {"name": "Malkawi, Ghassan"},
+    {"name": "Alazzam, Azmi"},
+    {"name": "Elsayed, Ahmed Abdelaziz"},
+    {"name": "Omari, Asem"},
+    {"name": "Badreddine, Said"},
+    {"name": "Hussein, Bakeel"},
+    {"name": "Alhagyan, Mohammed"},
+    {"name": "Altigani, Abdelrahman"}
+  ],
+  "keywords": [
+    "electric vehicle charging stations",
+    "EV charging siting",
+    "Dubai",
+    "NI-EA",
+    "GIS",
+    "multi-criteria decision making",
+    "robustness audit",
+    "reproducibility"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.3390/wevj17080411",
+      "relation": "isSupplementTo",
+      "scheme": "doi"
+    }
+  ]
+}
