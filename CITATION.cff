@@ -1,6 +1,9 @@
 cff-version: 1.2.0
 message: "If you use the scientific method or results, please cite the published article. Cite the Zenodo archive additionally when referring specifically to this reported-output reproducibility package."
 title: "WEVJ Dubai EV Charging Siting Reproducibility Archive"
+version: "1.0.0"
+doi: "10.5281/zenodo.22713999"
+date-released: "2026-09-11"
 authors:
   - family-names: Malkawi
     given-names: Ghassan
