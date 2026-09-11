@@ -1,11 +1,15 @@
 # WEVJ Dubai EV Charging Siting — Reproducibility Archive
 
+[![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22713999.svg)](https://doi.org/10.5281/zenodo.22713999)
+
 This repository supports the published article:
 
 **Ghassan Malkawi, Azmi Alazzam, Ahmed Abdelaziz Elsayed, Asem Omari, Said Badreddine, Bakeel Hussein, Mohammed Alhagyan, and Abdelrahman Altigani (2026).**  
 **“An Interaction-Aware NI-EA Framework for EV Charging-Station Siting: Source-Conditioned Robust Candidate Sets and Bounded Spatial Evidence in Dubai.”**  
 *World Electric Vehicle Journal*, **17**(8), 411.  
-DOI: https://doi.org/10.3390/wevj17080411
+Article DOI: https://doi.org/10.3390/wevj17080411  
+Reproducibility archive DOI: https://doi.org/10.5281/zenodo.22713999  
+GitHub release: **v1.0.0**
 
 Published: **6 August 2026**.
 
@@ -64,7 +68,13 @@ The official article and its publisher-hosted Supplementary Materials remain the
 
 ## Citation
 
-Please cite the published article when using the scientific method or results. Once the first GitHub release is archived by Zenodo, the Zenodo DOI may additionally be cited when referring specifically to this archived reproducibility package.
+Please cite the published article when using the scientific method or results:
+
+**Malkawi, G.; Alazzam, A.; Elsayed, A.A.; Omari, A.; Badreddine, S.; Hussein, B.; Alhagyan, M.; Altigani, A. (2026).** “An Interaction-Aware NI-EA Framework for EV Charging-Station Siting: Source-Conditioned Robust Candidate Sets and Bounded Spatial Evidence in Dubai.” *World Electric Vehicle Journal*, **17**(8), 411. https://doi.org/10.3390/wevj17080411
+
+When referring specifically to the archived public reproducibility package, also cite:
+
+**WEVJ Dubai EV Charging Siting Reproducibility Archive, v1.0.0.** Zenodo. https://doi.org/10.5281/zenodo.22713999
 
 ## Versioning
 
