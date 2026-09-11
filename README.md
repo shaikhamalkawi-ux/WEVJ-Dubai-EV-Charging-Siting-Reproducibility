@@ -11,13 +11,15 @@ Published: **6 August 2026**.
 
 ## Purpose
 
-This repository is the public reproducibility companion for the published paper. It is intended to make the reported screening and robustness outputs easier to inspect, cite, and reproduce without extending the claims beyond the published study.
+This repository is the public companion for the published paper. Its primary reproducibility claim is **reported-output verification**: it is intended to make the released, reuse-safe screening and robustness outputs easier to inspect, cite, and verify against the Version of Record.
+
+The published article explicitly distinguishes this from complete regeneration from all retained raw source layers. A separate raw-source regeneration step would be required before the workflow could be described as fully reproducible from those raw source layers.
 
 The study is a **public-data screening and robustness-audit study**. It is **not** demand validation, feeder-capacity validation, power-flow analysis, financial feasibility analysis, construction approval, or a final deployment plan.
 
 ## Published result anchors
 
-Any reproduced output should preserve the published result state:
+Any reproduced or verified output should preserve the published result state:
 
 - Admitted candidate/amenity records: **7,410**
 - Inside-boundary candidates: **5,097**
@@ -34,25 +36,25 @@ These values are verification targets, not parameters to be re-estimated.
 ## Repository structure
 
 - `data/` — documentation for reuse-safe derived data and redistribution boundaries.
-- `results/` — documentation for published verification targets and reported-output checks.
-- `reproducibility/` — instructions and scope for the reproducibility archive.
+- `results/` — published verification targets and reported-output checks.
+- `reproducibility/` — release instructions and the reproducibility boundary.
 - `CITATION.cff` — citation metadata for GitHub.
 - `.zenodo.json` — metadata prepared for Zenodo archiving.
 
-Additional reuse-safe supplementary files and verifier scripts can be added here only when they are confirmed to match the final published supplementary package.
+The first archival release will include reuse-safe supplementary files and verifier material only after they are checked against the final published supplementary package.
 
 ## Data and redistribution boundary
 
-The article uses public-data-derived and author-generated outputs. The published Supplementary Materials provide reuse-safe derived tables, scenario/rank diagnostics, sensitivity summaries, source/date/unit documentation, and reproducibility material.
+The article uses public-data-derived and author-generated outputs. The published Supplementary Materials provide coordinate-free candidate metrics, scenario/rank diagnostics, sensitivity summaries, source/date/unit documentation, verifier material, and bounded spatial-context summaries used for reported tables and figures.
 
-Raw third-party exports or coordinate archives whose licensing or platform terms may restrict redistribution should **not** be copied into this repository merely for convenience. Where redistribution is not appropriate, this repository should document the source, date, role, and retrieval route instead.
+Raw third-party exports or coordinate archives whose licensing or platform terms may restrict redistribution should **not** be copied into this repository merely for convenience. Where redistribution is not appropriate, this repository documents the source, date, role, and retrieval route instead.
 
 The official article and its Supplementary Materials remain the authoritative scientific record.
 
 ## Citation
 
-Please cite the published article when using the scientific method or results. Once the GitHub release is archived by Zenodo, the Zenodo DOI may additionally be cited for the archived reproducibility package.
+Please cite the published article when using the scientific method or results. Once the first GitHub release is archived by Zenodo, the Zenodo DOI may additionally be cited when referring specifically to this archived reproducibility package.
 
 ## Versioning
 
-The first archival release should be tagged `v1.0.0` only after the repository contents have been checked against the final published Supplementary Materials. Later releases should document repository or packaging changes without altering the published scientific results unless a documented correction is issued by the authors/publisher.
+The first archival release should be tagged `v1.0.0` only after the repository payload has been checked against the final published Supplementary Materials and the reported-output verifier has passed. Later releases should document repository or packaging changes without altering the published scientific results unless a documented correction is issued by the authors or publisher.
