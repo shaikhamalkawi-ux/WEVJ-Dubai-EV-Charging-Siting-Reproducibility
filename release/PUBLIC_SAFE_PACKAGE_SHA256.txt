@@ -1,0 +1,14 @@
+WEVJ Dubai EV Charging Siting — Public-Safe Reproducibility Package v1.0.0
+
+Package file: WEVJ_Dubai_EVCS_Reproducibility_PublicSafe_v1.0.0.zip
+SHA-256: 37b7e24863f0a349db0d475deb9196c07ed6a00d3c7c979f20a5f55ca5567be7
+Original final supplementary ZIP SHA-256: e00a4a06e6c841625bd18cc5ad5b4d9502416d1885e77cd9f317315646fac7a4
+Verification: 54 PASS / 0 FAIL
+Static manifest: 89 files
+ZIP integrity: PASS
+
+Packaging-only exclusions from the GitHub/Zenodo companion:
+- robust_candidate_sets/candidate_transit_proximity_context.csv (contains candidate latitude/longitude fields)
+- robust_candidate_sets/run_analysis.py (internal source-bound reconstruction script with absolute local paths and dependencies on controlled/raw inputs)
+
+No published scientific result, score, rank, weight, model structure, dataset used for the published analysis, or conclusion was changed.
