@@ -1,20 +1,26 @@
 # v1.1.0 release-candidate preparation
 
-Status: **RC1 PREPARATION — NOT RELEASED**.
+Status: **RC1 VERIFIED LOCALLY — NOT RELEASED**.
 
 The source-extension candidate preserves the published WEVJ paper and all reported scientific results. It adds only public-source traceability material that passed the current redistribution/provenance gate.
 
 ## Candidate payload
 
-The existing package `packages/WEVJ_Dubai_OpenData_SourceExtension_v1.1.0_PREP.zip` is internally self-consistent and contains:
+Verified candidate:
+
+`packages/WEVJ_Dubai_OpenData_SourceExtension_v1.1.0_RC1.zip`
+
+SHA-256: `51811ad32fb7ee111d35dea9279cafed75a8d770f899c77dd73f503b13728353`
+
+RC1 contains:
 
 - RTA Public Transportation Stations retained open-data snapshot — 137 rows.
 - Population by Community retained open-data snapshot — 1,130 rows.
-- Deterministic one-row-per-stop RTA bus-stop derivative — 4,505 stops, no missing coordinates.
-- The exact transformation script reproducing that derivative.
-- Attribution, provenance and SHA-256 records.
+- Deterministic one-row-per-stop RTA bus-stop derivative — 4,505 unique integer stop IDs, no missing coordinates.
+- Exact transformation script reproducing the derivative.
+- Attribution, provenance, redistribution matrix, QA and SHA-256 manifest records.
 
-Package SHA-256: `94202eb94d5691987d220ff44dbfdb008dfaeca7c7b271ff57b2120513b554d8`.
+The binary candidate is held outside GitHub until its exact SHA is manually uploaded to the preparation branch. No unverified binary placeholder is retained in the repository.
 
 ## RC1 gates
 
@@ -35,6 +41,8 @@ HOLD:
 - Metro/Tram historical KML snapshots.
 - Historical DEWA raw charger snapshot.
 - Historical Dubai Municipality community KML.
+
+A temporary GitHub Actions source-recovery/build test was used only as a strict fail-closed audit. Dubai Pulse downloads timed out from the hosted runner, and a binary-placeholder test was removed. No substitute source bytes and no failed-build artifacts remain in the preparation payload.
 
 ## Scientific lock
 
