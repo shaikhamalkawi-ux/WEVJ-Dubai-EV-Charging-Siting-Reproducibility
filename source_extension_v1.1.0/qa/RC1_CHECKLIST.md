@@ -10,7 +10,10 @@ Date: 2026-09-12
 - [x] Restricted/mixed third-party raw layers excluded.
 - [x] OpenStreetMap/Geofabrik large raw snapshot retained as link-only.
 - [x] Published scientific anchors and claim boundary preserved.
-- [x] PREP ZIP integrity and internal manifest verified.
+- [x] RC1 ZIP integrity and internal manifest verified locally.
+- [x] RC1 SHA-256 locked: `51811ad32fb7ee111d35dea9279cafed75a8d770f899c77dd73f503b13728353`.
+- [x] Temporary fail-closed GitHub Actions tests removed from the preparation branch after audit.
+- [ ] Upload the exact RC1 binary to `source_extension_v1.1.0/packages/` on the preparation branch and re-check SHA-256.
 - [ ] Author approval to publish v1.1.0.
 - [ ] Create GitHub release/tag v1.1.0 only after author approval.
 - [ ] Confirm Zenodo version DOI after GitHub release.
