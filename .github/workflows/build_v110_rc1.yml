@@ -1,0 +1,119 @@
+name: Build v1.1.0 RC1 source-extension package
+
+on:
+  push:
+    branches:
+      - v1.1.0-source-extension-prep
+    paths:
+      - .github/workflows/build_v110_rc1.yml
+
+permissions:
+  contents: write
+
+jobs:
+  build-rc1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v1.1.0-source-extension-prep
+
+      - name: Build and verify RC1
+        shell: python
+        run: |
+          from pathlib import Path
+          import csv, hashlib, shutil, zipfile
+
+          root = Path('.')
+          src = root / 'source_extension_v1.1.0'
+          prep = src / 'packages' / 'WEVJ_Dubai_OpenData_SourceExtension_v1.1.0_PREP.zip'
+          work = Path('/tmp/wevj_v110_rc1')
+          if work.exists():
+              shutil.rmtree(work)
+          work.mkdir(parents=True)
+
+          with zipfile.ZipFile(prep) as z:
+              if z.testzip() is not None:
+                  raise SystemExit('PREP ZIP integrity failed')
+              z.extractall(work)
+
+          # Overlay current provenance/QA state and the exact transformation script.
+          overlays = {
+              src / 'SOURCE_HASH_LOCK.csv': work / 'metadata' / 'SOURCE_HASH_LOCK.csv',
+              src / 'SOURCE_LICENSE_REGISTER.csv': work / 'metadata' / 'SOURCE_LICENSE_REGISTER.csv',
+              src / 'SOURCE_ADMISSION_SUMMARY.md': work / 'metadata' / 'SOURCE_ADMISSION_SUMMARY.md',
+              src / 'REDISTRIBUTION_MATRIX.csv': work / 'metadata' / 'REDISTRIBUTION_MATRIX.csv',
+              src / 'RELEASE_CANDIDATE_v1.1.0.md': work / 'RELEASE_CANDIDATE_v1.1.0.md',
+              src / 'qa' / 'OLD_LIBRARY_RECOVERY_AUDIT.md': work / 'qa' / 'OLD_LIBRARY_RECOVERY_AUDIT.md',
+              src / 'qa' / 'RC1_CHECKLIST.md': work / 'qa' / 'RC1_CHECKLIST.md',
+              src / 'scripts' / 'derive_current_bus_stops.py': work / 'scripts' / 'derive_current_bus_stops.py',
+          }
+          for a,b in overlays.items():
+              b.parent.mkdir(parents=True, exist_ok=True)
+              shutil.copy2(a,b)
+
+          expected = {
+              'data/raw_open/public_transportation_stations_2026-05-05_01-47-13_1.csv': 'd0c8f689f12904b1944260ec456ecbecb3a827c6760cc4256973c64acf67ea6b',
+              'data/raw_open/population_by_community_2026-04-29_13-36-57_1.csv': 'd6d4cc288de5a66c6aba054b486f998f495aba0471c33b3071e458a0d2bdd8d1',
+              'data/derived/rta_bus_stops_current_stop_level_derived_2026-04-29.csv': '3f1a47bf5b1608f22f414035fabb6d47d1081aaae8bf07397866cf7c47f6306e',
+          }
+          for rel, exp in expected.items():
+              data = (work / rel).read_bytes()
+              got = hashlib.sha256(data).hexdigest()
+              if got != exp:
+                  raise SystemExit(f'hash mismatch {rel}: {got} != {exp}')
+
+          def data_rows(path):
+              with path.open(newline='', encoding='utf-8-sig') as f:
+                  return sum(1 for _ in csv.reader(f)) - 1
+          if data_rows(work / 'data/raw_open/public_transportation_stations_2026-05-05_01-47-13_1.csv') != 137:
+              raise SystemExit('RTA stations row-count gate failed')
+          if data_rows(work / 'data/raw_open/population_by_community_2026-04-29_13-36-57_1.csv') != 1130:
+              raise SystemExit('population row-count gate failed')
+          if data_rows(work / 'data/derived/rta_bus_stops_current_stop_level_derived_2026-04-29.csv') != 4505:
+              raise SystemExit('bus derivative row-count gate failed')
+
+          # Regenerate package manifest after overlays.
+          manifest = work / 'SHA256SUMS.csv'
+          if manifest.exists():
+              manifest.unlink()
+          rows=[]
+          for p in sorted(work.rglob('*')):
+              if p.is_file():
+                  rows.append((p.relative_to(work).as_posix(), p.stat().st_size, hashlib.sha256(p.read_bytes()).hexdigest()))
+          with manifest.open('w', newline='', encoding='utf-8') as f:
+              w=csv.writer(f); w.writerow(['path','size_bytes','sha256']); w.writerows(rows)
+
+          out = src / 'packages' / 'WEVJ_Dubai_OpenData_SourceExtension_v1.1.0_RC1.zip'
+          if out.exists():
+              out.unlink()
+          with zipfile.ZipFile(out, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as z:
+              for p in sorted(work.rglob('*')):
+                  if p.is_file():
+                      z.write(p, p.relative_to(work).as_posix())
+          with zipfile.ZipFile(out) as z:
+              if z.testzip() is not None:
+                  raise SystemExit('RC1 ZIP integrity failed')
+              manifest_rows=list(csv.DictReader(z.read('SHA256SUMS.csv').decode('utf-8').splitlines()))
+              for row in manifest_rows:
+                  if hashlib.sha256(z.read(row['path'])).hexdigest() != row['sha256']:
+                      raise SystemExit(f"internal manifest mismatch: {row['path']}")
+
+          digest=hashlib.sha256(out.read_bytes()).hexdigest()
+          (src / 'packages' / 'WEVJ_Dubai_OpenData_SourceExtension_v1.1.0_RC1_SHA256.txt').write_text(
+              f'{digest}  {out.name}\n', encoding='utf-8'
+          )
+          print('PASS RC1', out, out.stat().st_size, digest)
+
+      - name: Commit RC1 package
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add source_extension_v1.1.0/packages/WEVJ_Dubai_OpenData_SourceExtension_v1.1.0_RC1.zip
+          git add source_extension_v1.1.0/packages/WEVJ_Dubai_OpenData_SourceExtension_v1.1.0_RC1_SHA256.txt
+          if git diff --cached --quiet; then
+            echo "RC1 package already current."
+          else
+            git commit -m "Build verified v1.1.0 RC1 source-extension package"
+            git push origin HEAD:v1.1.0-source-extension-prep
+          fi
