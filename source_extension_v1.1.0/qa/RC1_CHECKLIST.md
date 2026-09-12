@@ -15,6 +15,6 @@ Date: 2026-09-12
 - [x] Temporary fail-closed GitHub Actions tests removed from the preparation branch after audit.
 - [x] Exact RC1 binary uploaded to `source_extension_v1.1.0/packages/` and remotely matched to the verified local object.
 - [x] Author approval received to publish v1.1.0 on 2026-09-12.
-- [ ] Create and verify GitHub release/tag v1.1.0.
-- [ ] Confirm Zenodo version DOI after GitHub release.
-- [ ] Update main README/CITATION metadata with the new Zenodo version/concept DOI only after publication.
+- [x] GitHub release/tag v1.1.0 created and verified; release asset digest matches the locked RC1 SHA-256.
+- [ ] Confirm Zenodo v1.1.0 version DOI after GitHub-to-Zenodo archiving completes.
+- [ ] Update main README/CITATION metadata with the new Zenodo version/concept DOI after the DOI is confirmed.
