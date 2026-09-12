@@ -8,10 +8,12 @@ Rule
 ----
 1. Parse report_date.
 2. Remove the single row with null stop_id from the stop-level derivative.
-3. For each stop_id, retain rows having that stop's maximum report_date.
-4. Verify that stop-level identity, coordinates, facility fields and validity fields are
+3. Convert retained stop IDs to integers (the raw CSV is float-typed only because one
+   source row has a null stop_id).
+4. For each stop_id, retain rows having that stop's maximum report_date.
+5. Verify that stop-level identity, coordinates, facility fields and validity fields are
    invariant across route rows at that latest report date.
-5. Emit one representative row per stop plus route_count_latest_report and
+6. Emit one representative row per stop plus route_count_latest_report and
    source_rows_latest_report.
 
 The retained raw snapshot used in the v1.1.0 preparation audit has 451,712 rows and
@@ -61,6 +63,7 @@ def main() -> None:
         raise SystemExit("Unparseable report_date value(s) found")
 
     d = df.dropna(subset=["stop_id"]).copy()
+    d["stop_id"] = d["stop_id"].astype("int64")
     latest_date = d.groupby("stop_id")["_report_date"].transform("max")
     latest = d[d["_report_date"].eq(latest_date)].copy()
 
