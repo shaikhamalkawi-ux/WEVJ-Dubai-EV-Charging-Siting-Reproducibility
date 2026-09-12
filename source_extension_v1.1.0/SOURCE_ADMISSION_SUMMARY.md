@@ -20,7 +20,7 @@ The older WEVJ/NI-EA libraries and packages were searched again, including Phase
    - raw SHA-256 `dcd1ebab4a583c782e4e657993237581b446f2e9bedf35c3fc3ace53edbbbe57`
    - public-prep derivative: one latest-report row per integer stop ID, 4,505 rows, no missing coordinates
    - derivative SHA-256 `3f1a47bf5b1608f22f414035fabb6d47d1081aaae8bf07397866cf7c47f6306e`
-   - deterministic transformation script is committed on this branch.
+   - deterministic transformation script is committed on this branch and reproduces the included derivative exactly from the retained raw audit snapshot.
 
 3. **Population by Community** — `ADMIT-HASH-LOCKED-PREP`
    - 1,130 rows
@@ -28,7 +28,7 @@ The older WEVJ/NI-EA libraries and packages were searched again, including Phase
    - official resource ID `bedb04be-66cf-4b66-a628-07e5c674a3af`
    - role: descriptive community/population context only, not demand validation.
 
-A GitHub Actions workflow on this branch performs a strict hash gate for the two exact official portal snapshots above. It will refuse to commit a current portal download if the bytes no longer match the retained study snapshot.
+A strict hash-gated recovery test was also run against the official Dubai Pulse download endpoints. The hosted GitHub runner timed out before it could recover the retained snapshots, and the gate therefore failed safely without committing any substitute bytes. The temporary recovery workflow was removed after the test; this access failure is documented in the QA audit and is not treated as a data mismatch.
 
 ### Recovered but still held
 
@@ -38,7 +38,7 @@ A GitHub Actions workflow on this branch performs a strict hash gate for the two
 
 6. **Population Cluster** — SHA-256 `9db1c3aea4bbb8d1fdeb0a338b24bcfa31306d68eaa86e0a2bffbdf53429031c`. The captured portal listing says Open; exact resource identity remains unresolved.
 
-7. **Metro Stations CSV** — 55 rows; SHA-256 `b1d2de46106ab9707ec07c700ae809629d4b4fba91eb6138ee46a900c09cd4d5`. Retained as an auxiliary audit file; it is not needed for the core extension because the published source-context ontology uses the unified public-transport stations layer.
+7. **Metro Stations CSV** — 55 rows; SHA-256 `b1d2de46106ab9707ec07c700ae809629d4b4fba91eb6138ee46a900c09cd4d5`. The official dataset `rta_metro_stations-open` and its CSV resource are publicly identifiable, but the exact retained file/version was not hash-matched to the portal resource. It remains auxiliary/HOLD and is not needed for the core extension because the published source-context ontology uses the unified public-transport stations layer.
 
 8. **Metro GIS KML** — 56 point features; SHA-256 `ce4e69c6503c0fd40c8da4c15c662f800731434fb064b3b11a876f4f10428e24`. Hold until exact historical KML resource/version is tied to the official portal.
 
