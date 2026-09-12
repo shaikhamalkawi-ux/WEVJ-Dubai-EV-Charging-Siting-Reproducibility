@@ -2,77 +2,60 @@
 
 **Status: PREPARATION ONLY. No v1.1.0 release has been created and nothing on `v1.0.0` has been altered.**
 
-This note records the current evidence state for a possible Dubai open-data source extension. `ADMIT` below means *technically/source-provenance admissible for the future package after the remaining licence/attribution gates are closed*; it is not a legal opinion and it does not expand the scientific claims of the paper.
+This note records the evidence state for a possible Dubai open-data source extension. `ADMIT` means technically/source-provenance admissible for a future package after all stated gates are closed; it is not a legal opinion and it does not expand the scientific claims of the paper.
 
-## Governing reuse evidence
+## Old-library recovery pass
 
-- Dubai Law No. (26) of 2015 defines Open Data and requires government data providers to disseminate Open Data under the competent authority's standards and policies.
-- The current Dubai Pulse **Open Data Licence** states that use of information offered under that licence is governed by its terms. The licence is retained as the general reuse instrument for Data Dubai/Dubai Pulse open datasets.
-- Dataset-specific metadata still controls where it is more restrictive or where resource provenance is unresolved.
+The older WEVJ/NI-EA libraries and packages were searched again, including Phase14, Phase29A, Phase31/31B, SourceConditioned, SubmissionReady, and preservation/QA packages. This recovered several exact source snapshots and confirmed that the later public/submission packages intentionally omitted the raw DEWA coordinate export, Dubai community KML, Geofabrik PBF, and mixed source archives.
 
-Official licence: https://www.dubaipulse.gov.ae/docs/DDE%20_%20DRAFT_Open_Data%20Licence_LONG_Form_English%203.pdf
+### Admitted or preparation-ready
 
-## Current source state
-
-### Source identity + retained bytes locked
-
-1. **RTA Public Transportation Stations** — `ADMIT-HASH-LOCKED`
-   - retained SHA-256: `d0c8f689f12904b1944260ec456ecbecb3a827c6760cc4256973c64acf67ea6b`
+1. **RTA Public Transportation Stations** — `ADMIT-HASH-LOCKED-PREP`
    - 137 rows
+   - SHA-256 `d0c8f689f12904b1944260ec456ecbecb3a827c6760cc4256973c64acf67ea6b`
    - role: descriptive urban-accessibility context only.
 
-2. **RTA Bus Stop Details** — `ADMIT-HASH-LOCKED-DERIVATIVE-PREFERRED`
-   - raw retained SHA-256: `dcd1ebab4a583c782e4e657993237581b446f2e9bedf35c3fc3ace53edbbbe57`
-   - raw rows: 451,712; unique non-null stop IDs: 4,505
-   - exact official dataset identity: `rta_bus_stop_details-open`
-   - a deterministic one-row-per-stop derivative has been prepared and QA-checked; its SHA-256 is `d2e919d9d6ec5f5f561dcb48a14647002f169308ae7a7cd95264a5dbf58b13d6`.
-   - the raw 67 MB snapshot is not planned for GitHub; the compact derivative is preferred after the final licence gate.
+2. **RTA Bus Stop Details derivative** — `ADMIT-DERIVED-HASH-LOCKED-PREP`
+   - raw retained snapshot: 451,712 rows; 4,505 unique non-null stop IDs
+   - raw SHA-256 `dcd1ebab4a583c782e4e657993237581b446f2e9bedf35c3fc3ace53edbbbe57`
+   - public-prep derivative: one latest-report row per integer stop ID, 4,505 rows, no missing coordinates
+   - derivative SHA-256 `3f1a47bf5b1608f22f414035fabb6d47d1081aaae8bf07397866cf7c47f6306e`
+   - deterministic transformation script is committed on this branch.
 
-3. **Population by Community** — `ADMIT-HASH-LOCKED`
-   - retained SHA-256: `d6d4cc288de5a66c6aba054b486f998f495aba0471c33b3071e458a0d2bdd8d1`
+3. **Population by Community** — `ADMIT-HASH-LOCKED-PREP`
    - 1,130 rows
-   - role: descriptive community/population enrichment only; not demand validation.
+   - SHA-256 `d6d4cc288de5a66c6aba054b486f998f495aba0471c33b3071e458a0d2bdd8d1`
+   - official resource ID `bedb04be-66cf-4b66-a628-07e5c674a3af`
+   - role: descriptive community/population context only, not demand validation.
 
-### Source identity locked; one byte/resource gate remains
+A GitHub Actions workflow on this branch performs a strict hash gate for the two exact official portal snapshots above. It will refuse to commit a current portal download if the bytes no longer match the retained study snapshot.
 
-4. **DEWA EV Green Charger raw export**
-   - prior exact retained-file SHA-256: `2a881f803e5642ae03fe09f4f737c2d0506b175f46b9ca6a4bd9bd275a3ea526`
-   - 335 records; 304 unique exact coordinates in the prior verified snapshot
-   - official dataset page: `dewa_ev_green_charger-open`, classified Open Data
-   - the current dataset metadata itself displays `License: notspecified`; therefore the final public package will preserve the Dubai Open Data Licence as the general reuse basis and will not publish this file until its retained bytes are re-hashed in the release workspace.
+### Recovered but still held
 
-5. **Dubai Municipality Community polygons**
-   - official source identity: `dm_community-open`
-   - prior inspection: 224 polygons
-   - exact retained KML SHA-256 still needs to be locked before redistribution.
+4. **Parking Spaces Per Zone** — 84 rows; SHA-256 `e368bd1ccaf9ca168e3ea044fdd113d247425cc19c11d079ed4bc7e6d7981e2a`. Open status is confirmed, but the exact Data Dubai resource identity/version for the retained snapshot is still required.
 
-### Hash locked; exact retained resource URL/version still held
+5. **Estimated Population by Community** — 1,578 rows; SHA-256 `67e4bdfb276acfe2821cabe7ba190709667b336134355d61b7b778bd153b9d00`. The captured portal listing says Open; exact resource identity remains unresolved.
 
-6. **Number of Parking Spaces Per Zone**
-   - SHA-256: `e368bd1ccaf9ca168e3ea044fdd113d247425cc19c11d079ed4bc7e6d7981e2a`
-   - 84 rows
-   - Open status is confirmed; the exact Data Dubai resource URL for this retained snapshot is still required.
+6. **Population Cluster** — SHA-256 `9db1c3aea4bbb8d1fdeb0a338b24bcfa31306d68eaa86e0a2bffbdf53429031c`. The captured portal listing says Open; exact resource identity remains unresolved.
 
-7. **Estimated Population by Community**
-   - SHA-256: `67e4bdfb276acfe2821cabe7ba190709667b336134355d61b7b778bd153b9d00`
-   - 1,578 rows
-   - portal listing is Open; exact dataset/resource identity remains to be locked.
+7. **Metro Stations CSV** — 55 rows; SHA-256 `b1d2de46106ab9707ec07c700ae809629d4b4fba91eb6138ee46a900c09cd4d5`. Retained as an auxiliary audit file; it is not needed for the core extension because the published source-context ontology uses the unified public-transport stations layer.
 
-8. **Population Cluster**
-   - SHA-256: `9db1c3aea4bbb8d1fdeb0a338b24bcfa31306d68eaa86e0a2bffbdf53429031c`
-   - exact dataset/resource identity remains to be locked.
+8. **Metro GIS KML** — 56 point features; SHA-256 `ce4e69c6503c0fd40c8da4c15c662f800731434fb064b3b11a876f4f10428e24`. Hold until exact historical KML resource/version is tied to the official portal.
 
-9. **RTA Tram Stations retained KML**
-   - SHA-256: `f90dc6aceb486b3706cefdd246d81f7b72be36e6fc4157c5027ffdc2d2e8cdbe`
-   - 11 points
-   - official dataset is Open, but the current portal exposes a CSV resource; the retained KML version remains on HOLD until its exact official resource/version is resolved.
+9. **Tram Stations KML** — 11 points; SHA-256 `f90dc6aceb486b3706cefdd246d81f7b72be36e6fc4157c5027ffdc2d2e8cdbe`. Hold for the same historical-resource reason.
+
+### Source identity/history known, exact retained bytes not recovered
+
+10. **Official DEWA EV Green Charger source snapshot** — historical exact SHA-256 `2a881f803e5642ae03fe09f4f737c2d0506b175f46b9ca6a4bd9bd275a3ea526`, 335 records, 304 unique exact coordinates. Old WEVJ packages were searched again but the exact raw CSV bytes were not recovered. Do not substitute a newer portal export for the historical study snapshot.
+
+11. **Dubai Municipality Community KML** — source identity `dm_community-open`; historical project inspection recorded 224 polygons. Exact retained KML bytes were not recovered from old WEVJ packages, so no boundary file is redistributed yet.
 
 ### Intentionally not redistributed
 
-10. **Geofabrik GCC OSM PBF** — `LINK-ONLY`; retain source URL/snapshot/checksum and ODbL attribution rather than duplicating the large file.
-11. **Google Maps / Places / Geocoding raw outputs** — `DO-NOT-REDISTRIBUTE`.
-12. **Mixed raw 7,410-candidate archive** — `HOLD-PROVENANCE-AUDIT` until row-level source provenance excludes restricted third-party content.
+12. **Geofabrik GCC OSM PBF** — `LINK-ONLY`; historical study-source SHA-256 `02b0f40a26734cea4220ff928626e28ad95882d309a9eec08f3621a3b7f2f8c4`. Retain source URL/snapshot/checksum and ODbL attribution rather than duplicating the large file.
+13. **Google Maps / Places / Geocoding raw outputs** — `DO-NOT-REDISTRIBUTE`.
+14. **Mixed raw 7,410-candidate/source archive** — `HOLD-PROVENANCE-AUDIT`; it is not made public because row-level source provenance includes mixed acquisition sources. The published coordinate-free 5,097-candidate derived outputs remain the safe public layer.
 
 ## Scientific boundary
 
-None of these source-package changes modifies the Version of Record or any published score, ranking, weight, model structure, dataset definition, or conclusion. The source extension, if eventually released, supports stronger public source traceability and partial source-to-output regeneration. It does **not** establish observed charging demand, feeder capacity, power-flow feasibility, financial feasibility, construction approval, or a final deployment plan.
+None of these source-package actions changes the Version of Record or any published score, ranking, weight, model structure, dataset definition, or conclusion. The source extension, if eventually released, supports stronger public source traceability and partial source-to-output regeneration. It does **not** establish observed charging demand, feeder capacity, power-flow feasibility, financial feasibility, construction approval, or a final deployment plan.
