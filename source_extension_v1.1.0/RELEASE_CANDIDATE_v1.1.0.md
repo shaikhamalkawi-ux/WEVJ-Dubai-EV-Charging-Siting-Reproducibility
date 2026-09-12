@@ -1,12 +1,10 @@
-# v1.1.0 release-candidate preparation
+# v1.1.0 release candidate
 
-Status: **RC1 VERIFIED LOCALLY AND ON GITHUB — NOT RELEASED**.
+Status: **APPROVED FOR RELEASE — 2026-09-12**.
 
-The source-extension candidate preserves the published WEVJ paper and all reported scientific results. It adds only public-source traceability material that passed the current redistribution/provenance gate.
+The source extension preserves the published WEVJ paper and all reported scientific results. It adds only public-source traceability material that passed the redistribution/provenance gate.
 
-## Candidate payload
-
-Verified candidate:
+## Release payload
 
 `packages/WEVJ_Dubai_OpenData_SourceExtension_v1.1.0_RC1.zip`
 
@@ -14,9 +12,9 @@ Verified candidate:
 - SHA-256: `51811ad32fb7ee111d35dea9279cafed75a8d770f899c77dd73f503b13728353`
 - Git blob SHA: `d53543f35d8844f240047dfd3a9d8d97e1f8ccf8`
 
-The remote Git blob SHA is identical to the locally computed Git blob SHA for the verified RC1 binary. This establishes byte-for-byte identity between the uploaded GitHub object and the locally tested release candidate.
+The remote Git blob SHA is identical to the locally computed Git blob SHA for the verified RC1 binary, establishing byte-for-byte identity between the uploaded GitHub object and the locally tested release candidate.
 
-RC1 contains:
+The package contains:
 
 - RTA Public Transportation Stations retained open-data snapshot — 137 rows.
 - Population by Community retained open-data snapshot — 1,130 rows.
@@ -24,7 +22,7 @@ RC1 contains:
 - Exact transformation script reproducing the derivative.
 - Attribution, provenance, redistribution matrix, QA and SHA-256 manifest records.
 
-## RC1 gates
+## Release gates
 
 PASS:
 - ZIP integrity.
@@ -36,19 +34,18 @@ PASS:
 - Transformation script reproduces derivative SHA-256 `3f1a47bf5b1608f22f414035fabb6d47d1081aaae8bf07397866cf7c47f6306e` exactly from the retained raw audit snapshot.
 - Uploaded GitHub binary is byte-identical to the locally verified RC1 file.
 - No Google-derived raw material, no mixed 7,410-candidate raw archive, no DEWA raw coordinate export, no community KML, and no Geofabrik PBF are included.
+- Author approval to publish v1.1.0 received on 2026-09-12.
 
-HOLD:
+HOLD / excluded from this release:
 - Parking Spaces Per Zone.
 - Estimated Population by Community.
 - Population Cluster.
 - Metro/Tram historical KML snapshots.
 - Historical DEWA raw charger snapshot.
 - Historical Dubai Municipality community KML.
-
-A temporary GitHub Actions source-recovery/build test was used only as a strict fail-closed audit. Dubai Pulse downloads timed out from the hosted runner, and a binary-placeholder test was removed. No substitute source bytes and no failed-build artifacts remain in the preparation payload.
+- Geofabrik GCC PBF remains link-only under ODbL.
+- Google raw outputs and the mixed-source 7,410-candidate archive remain excluded.
 
 ## Scientific lock
 
 No score, ranking, weight, model structure, dataset definition, or conclusion is changed. The source extension supports source traceability and partial source-to-output regeneration only; it is not observed-demand validation, feeder-capacity validation, power-flow analysis, financial feasibility analysis, construction approval, or a final deployment plan.
-
-Do not publish `v1.1.0` or create a new Zenodo version until the author explicitly approves the release candidate.
