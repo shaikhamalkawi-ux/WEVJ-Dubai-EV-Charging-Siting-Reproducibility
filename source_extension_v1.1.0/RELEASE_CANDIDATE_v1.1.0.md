@@ -1,6 +1,6 @@
 # v1.1.0 release-candidate preparation
 
-Status: **RC1 VERIFIED LOCALLY — NOT RELEASED**.
+Status: **RC1 VERIFIED LOCALLY AND ON GITHUB — NOT RELEASED**.
 
 The source-extension candidate preserves the published WEVJ paper and all reported scientific results. It adds only public-source traceability material that passed the current redistribution/provenance gate.
 
@@ -10,7 +10,11 @@ Verified candidate:
 
 `packages/WEVJ_Dubai_OpenData_SourceExtension_v1.1.0_RC1.zip`
 
-SHA-256: `51811ad32fb7ee111d35dea9279cafed75a8d770f899c77dd73f503b13728353`
+- size: `135405` bytes
+- SHA-256: `51811ad32fb7ee111d35dea9279cafed75a8d770f899c77dd73f503b13728353`
+- Git blob SHA: `d53543f35d8844f240047dfd3a9d8d97e1f8ccf8`
+
+The remote Git blob SHA is identical to the locally computed Git blob SHA for the verified RC1 binary. This establishes byte-for-byte identity between the uploaded GitHub object and the locally tested release candidate.
 
 RC1 contains:
 
@@ -19,8 +23,6 @@ RC1 contains:
 - Deterministic one-row-per-stop RTA bus-stop derivative — 4,505 unique integer stop IDs, no missing coordinates.
 - Exact transformation script reproducing the derivative.
 - Attribution, provenance, redistribution matrix, QA and SHA-256 manifest records.
-
-The binary candidate is held outside GitHub until its exact SHA is manually uploaded to the preparation branch. No unverified binary placeholder is retained in the repository.
 
 ## RC1 gates
 
@@ -32,6 +34,7 @@ PASS:
 - Bus-stop derivative row count = 4,505 unique integer `stop_id` values.
 - Bus-stop derivative missing-coordinate count = 0.
 - Transformation script reproduces derivative SHA-256 `3f1a47bf5b1608f22f414035fabb6d47d1081aaae8bf07397866cf7c47f6306e` exactly from the retained raw audit snapshot.
+- Uploaded GitHub binary is byte-identical to the locally verified RC1 file.
 - No Google-derived raw material, no mixed 7,410-candidate raw archive, no DEWA raw coordinate export, no community KML, and no Geofabrik PBF are included.
 
 HOLD:
