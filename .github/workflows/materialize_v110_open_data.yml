@@ -14,6 +14,7 @@ permissions:
 jobs:
   materialize:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
         with:
@@ -28,12 +29,18 @@ jobs:
           targets = [
               {
                   "name": "public_transportation_stations_2026-05-05_01-47-13_1.csv",
-                  "url": "https://www.dubaipulse.gov.ae/dataset/fd25f886-5c7a-496e-b547-0bed0df5f5ef/resource/75ee9a69-9744-4356-91ea-66d4713a9f1d/download/public_transportation_stations.csv",
+                  "urls": [
+                      "https://www.dubaipulse.gov.ae/dataset/fd25f886-5c7a-496e-b547-0bed0df5f5ef/resource/75ee9a69-9744-4356-91ea-66d4713a9f1d/download/public_transportation_stations.csv",
+                      "https://gslb.dubaipulse.gov.ae/dataset/fd25f886-5c7a-496e-b547-0bed0df5f5ef/resource/75ee9a69-9744-4356-91ea-66d4713a9f1d/download/public_transportation_stations.csv",
+                  ],
                   "sha256": "d0c8f689f12904b1944260ec456ecbecb3a827c6760cc4256973c64acf67ea6b",
               },
               {
                   "name": "population_by_community_2026-04-29_13-36-57_1.csv",
-                  "url": "https://www.dubaipulse.gov.ae/dataset/d561ddcb-c04c-4827-aa03-b9d8abcb5fff/resource/bedb04be-66cf-4b66-a628-07e5c674a3af/download/population_by_community.csv",
+                  "urls": [
+                      "https://www.dubaipulse.gov.ae/dataset/d561ddcb-c04c-4827-aa03-b9d8abcb5fff/resource/bedb04be-66cf-4b66-a628-07e5c674a3af/download/population_by_community.csv",
+                      "https://gslb.dubaipulse.gov.ae/dataset/d561ddcb-c04c-4827-aa03-b9d8abcb5fff/resource/bedb04be-66cf-4b66-a628-07e5c674a3af/download/population_by_community.csv",
+                  ],
                   "sha256": "d6d4cc288de5a66c6aba054b486f998f495aba0471c33b3071e458a0d2bdd8d1",
               },
           ]
@@ -43,30 +50,35 @@ jobs:
 
           for target in targets:
               data = None
-              last_error = None
-              for attempt in range(5):
-                  try:
-                      req = urllib.request.Request(
-                          target["url"],
-                          headers={"User-Agent": "WEVJ-reproducibility-source-lock/1.1"},
-                      )
-                      with urllib.request.urlopen(req, timeout=90) as response:
-                          data = response.read()
+              errors = []
+              for url in target["urls"]:
+                  for attempt in range(2):
+                      try:
+                          req = urllib.request.Request(
+                              url,
+                              headers={"User-Agent": "WEVJ-reproducibility-source-lock/1.1"},
+                          )
+                          with urllib.request.urlopen(req, timeout=20) as response:
+                              candidate = response.read()
+                          digest = hashlib.sha256(candidate).hexdigest()
+                          if digest == target["sha256"]:
+                              data = candidate
+                              print(f"PASS {target['name']} via {url} {digest}")
+                              break
+                          errors.append(f"hash mismatch via {url}: {digest}")
+                          break
+                      except Exception as exc:
+                          errors.append(f"{url} attempt {attempt + 1}: {exc!r}")
+                          time.sleep(2)
+                  if data is not None:
                       break
-                  except Exception as exc:
-                      last_error = exc
-                      time.sleep(5 * (attempt + 1))
-              if data is None:
-                  raise SystemExit(f"Could not download {target['name']}: {last_error}")
 
-              digest = hashlib.sha256(data).hexdigest()
-              if digest != target["sha256"]:
+              if data is None:
                   raise SystemExit(
-                      f"HASH MISMATCH for {target['name']}: expected {target['sha256']} got {digest}. "
-                      "The current portal resource is not the retained study snapshot; refusing to commit it."
+                      f"No exact retained snapshot recovered for {target['name']}; refusing substitution. "
+                      + " | ".join(errors)
                   )
               (outdir / target["name"]).write_bytes(data)
-              print(f"PASS {target['name']} {digest}")
 
       - name: Commit admitted snapshots if exact matches were recovered
         run: |
