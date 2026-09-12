@@ -1,7 +1,7 @@
 {
   "title": "WEVJ Dubai EV Charging Siting Reproducibility Archive",
   "upload_type": "software",
-  "description": "Public reported-output verification companion for the published World Electric Vehicle Journal article 'An Interaction-Aware NI-EA Framework for EV Charging-Station Siting: Source-Conditioned Robust Candidate Sets and Bounded Spatial Evidence in Dubai' (2026, 17(8), 411; DOI: 10.3390/wevj17080411). The archive supports inspection and verification of reuse-safe public-data screening and robustness-audit outputs against the Version of Record. It is not a claim of complete regeneration from every retained raw source layer and does not constitute demand validation, feeder-capacity validation, power-flow analysis, financial feasibility assessment, construction approval, or a final deployment plan.",
+  "description": "Version 1.1.0 of the public reproducibility companion for the published World Electric Vehicle Journal article 'An Interaction-Aware NI-EA Framework for EV Charging-Station Siting: Source-Conditioned Robust Candidate Sets and Bounded Spatial Evidence in Dubai' (2026, 17(8), 411; DOI: 10.3390/wevj17080411). This version preserves the reported-output verification package and adds source-traceability material for selected reuse-safe Dubai government open-data layers: RTA Public Transportation Stations, Population by Community, and a deterministic stop-level derivative of the retained RTA Bus Stop Details snapshot. The extension does not alter any published score, ranking, weight, model structure, dataset definition, or conclusion. It does not claim complete regeneration from every retained raw source layer and does not constitute demand validation, feeder-capacity validation, power-flow analysis, financial feasibility assessment, construction approval, or a final deployment plan.",
   "creators": [
     {"name": "Malkawi, Ghassan", "orcid": "0000-0002-5320-7561"},
     {"name": "Alazzam, Azmi"},
@@ -21,6 +21,8 @@
     "multi-criteria decision making",
     "robustness audit",
     "reported-output verification",
+    "source traceability",
+    "open data",
     "reproducibility"
   ],
   "related_identifiers": [
